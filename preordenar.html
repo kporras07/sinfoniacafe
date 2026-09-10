@@ -26,7 +26,7 @@
       gap: 1rem;
       position: sticky;
       top: 0;
-      background-color: #637732;
+      background-color: #4a5a25;
       z-index: 10;
     }
 
@@ -41,6 +41,12 @@
       color: #f0e6cf;
       text-decoration: none;
       font-size: 1.25rem;
+    }
+
+    header .site-title {
+      font-size: 1.5rem;
+      font-style: italic;
+      letter-spacing: 0.05em;
     }
 
     .cart-btn {
@@ -334,10 +340,10 @@
 </head>
 <body>
   <header>
-    <a href="index.html">
+    <a href="/">
       <img src="images/logo.jpg" alt="Sinfonía Café">
     </a>
-    <a href="index.html">Sinfonía Café</a>
+    <a href="/" class="site-title">Sinfonía Café</a>
     <button class="cart-btn" onclick="toggleCart()">
       Carrito<span class="cart-count hidden" id="cart-count">0</span>
     </button>

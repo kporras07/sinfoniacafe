@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preordenar — Sinfonía Café</title>
+  <link rel="icon" type="image/jpeg" href="images/logo.jpg">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: #637732;
+      color: #f0e6cf;
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    header {
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    header img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    header a {
+      color: #f0e6cf;
+      text-decoration: none;
+      font-size: 1.25rem;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      opacity: 0.75;
+      font-style: italic;
+      margin-bottom: 2.5rem;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background-color: rgba(240, 230, 207, 0.1);
+      border: 1px solid rgba(240, 230, 207, 0.25);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .product-card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card .price {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.85;
+    }
+
+    .product-card p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      opacity: 0.75;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 4rem 1rem;
+      opacity: 0.7;
+    }
+
+    .empty-state p {
+      font-size: 1.1rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">
+      <img src="images/logo.jpg" alt="Sinfonía Café">
+    </a>
+    <a href="index.html">Sinfonía Café</a>
+  </header>
+
+  <main>
+    <h1>Preordenar</h1>
+    <p class="subtitle">Productos disponibles para preorden</p>
+
+    <div class="empty-state">
+      <p>Muy pronto agregaremos productos aquí. Seguinos en
+        <a href="https://instagram.com/sinfonia_cafe_cr" target="_blank" rel="noopener" style="color: #f0e6cf;">Instagram</a>
+        para enterarte primero.</p>
+    </div>
+
+    <!-- Ejemplo de producto (descomentá y duplicá para agregar productos):
+    <div class="products">
+      <div class="product-card">
+        <h2>Café Sinfonía — Tueste Medio</h2>
+        <div class="price">₡5,000</div>
+        <p>Bolsa de 340g. Notas de chocolate, cítricos y caramelo.</p>
+      </div>
+    </div>
+    -->
+  </main>
+</body>
+</html>

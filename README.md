@@ -6,8 +6,11 @@ Hosted on GitHub Pages at [sinfoniacafe.kporras07.com](https://sinfoniacafe.kpor
 
 ## Structure
 
-- `index.html` — Homepage with logo and links to Instagram and preorder page
-- `preordenar.html` — Product catalog with category filters, shopping cart (localStorage), and WhatsApp preorder integration
+- `index.html` — Homepage with logo and links
+- `cafe.html` — Coffee catalog with variety, region, producer, altitude, and process details
+- `preordenar.html` — Product preorder catalog with category filters, shopping cart (localStorage), and WhatsApp integration
+- `styles.css` — Shared styles (layout, header, nav, product grid, buttons)
+- `main.js` — Shared JS (WhatsApp link builder, price formatting, nav toggle)
 - `images/` — Product images and logo
 
 ## Development

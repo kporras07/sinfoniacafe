@@ -5,122 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Preordenar — Sinfonía Café</title>
   <link rel="icon" type="image/jpeg" href="images/logo.jpg">
+  <link rel="stylesheet" href="styles.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      min-height: 100vh;
-      background-color: #637732;
-      color: #f0e6cf;
-      font-family: Georgia, 'Times New Roman', serif;
-    }
-
-    header {
-      padding: 1.5rem 2rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      position: sticky;
-      top: 0;
-      background-color: #4a5a25;
-      z-index: 10;
-    }
-
-    header img {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    header a {
-      color: #f0e6cf;
-      text-decoration: none;
-      font-size: 1.25rem;
-    }
-
-    header .site-title {
-      font-size: 1.5rem;
-      font-style: italic;
-      letter-spacing: 0.05em;
-    }
-
-    .hamburger {
-      margin-left: auto;
-      background: none;
-      border: none;
-      color: #f0e6cf;
-      font-size: 1.6rem;
-      cursor: pointer;
-      padding: 0.25rem;
-      line-height: 1;
-    }
-
-    .nav-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background-color: #4a5a25;
-      padding: 0.5rem 2rem 1rem;
-      flex-direction: column;
-    }
-
-    .nav-menu.open {
-      display: flex;
-    }
-
-    .nav-menu a {
-      color: #f0e6cf;
-      text-decoration: none;
-      padding: 0.6rem 0;
-      font-size: 1rem;
-      border-bottom: 1px solid rgba(240, 230, 207, 0.15);
-    }
-
-    .nav-menu a:last-child {
-      border-bottom: none;
-    }
-
-    .nav-menu a:hover {
-      opacity: 0.8;
-    }
-
-    @media (min-width: 768px) {
-      .hamburger {
-        display: none;
-      }
-
-      .nav-menu {
-        display: flex;
-        position: static;
-        flex-direction: row;
-        gap: 2rem;
-        background: none;
-        padding: 0;
-        margin-left: auto;
-        align-items: center;
-      }
-
-      .nav-menu a {
-        padding: 0.4rem 0;
-        font-size: 1.05rem;
-        border-bottom: 2px solid transparent;
-        letter-spacing: 0.03em;
-      }
-
-      .nav-menu a:hover {
-        border-bottom-color: #f0e6cf;
-        opacity: 1;
-      }
-
-    }
-
     .cart-btn {
       position: fixed;
       bottom: 2rem;
@@ -161,20 +47,7 @@
       display: none;
     }
 
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 1rem 2rem 4rem;
-    }
-
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
     .subtitle {
-      opacity: 0.75;
-      font-style: italic;
       margin-bottom: 2rem;
     }
 
@@ -218,80 +91,10 @@
       border-bottom: 1px solid rgba(240, 230, 207, 0.3);
     }
 
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .product-card {
-      background-color: rgba(240, 230, 207, 0.1);
-      border: 1px solid rgba(240, 230, 207, 0.25);
-      border-radius: 8px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .product-card img {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
-      background-color: rgba(240, 230, 207, 0.05);
-    }
-
-    .product-info {
-      padding: 1rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .product-info h3 {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
-    }
-
     .product-info .price {
       font-size: 1.1rem;
       margin-bottom: 1rem;
       opacity: 0.85;
-    }
-
-    .product-actions {
-      margin-top: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .btn {
-      display: block;
-      text-align: center;
-      padding: 0.6rem 1rem;
-      border-radius: 4px;
-      font-family: inherit;
-      font-size: 0.9rem;
-      cursor: pointer;
-      text-decoration: none;
-      border: none;
-      transition: opacity 0.2s;
-    }
-
-    .btn:hover {
-      opacity: 0.85;
-    }
-
-    .btn-primary {
-      background-color: #f0e6cf;
-      color: #637732;
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: #f0e6cf;
-      border: 1px solid rgba(240, 230, 207, 0.5);
     }
 
     .cart-overlay {
@@ -426,7 +229,7 @@
       <a href="preordenar">Preordenar</a>
       <a href="https://instagram.com/sinfonia_cafe_cr" target="_blank" rel="noopener">Instagram</a>
     </nav>
-    <button class="hamburger" onclick="document.getElementById('nav').classList.toggle('open')" aria-label="Menú">&#9776;</button>
+    <button class="hamburger" onclick="toggleNav()" aria-label="Menú">&#9776;</button>
   </header>
 
   <button class="cart-btn" onclick="toggleCart()">
@@ -457,8 +260,8 @@
     </div>
   </div>
 
+  <script src="main.js"></script>
   <script>
-    var WA_NUMBER = ['\x35\x30\x36', '854', '892', '36'].join('');
     var PLACEHOLDER_IMG = 'data:image/svg+xml,' + encodeURIComponent(
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">' +
       '<rect fill="%23556b2a" width="400" height="400"/>' +
@@ -500,10 +303,6 @@
     });
 
     var activeFilter = null;
-
-    function formatPrice(n) {
-      return '₡' + n.toLocaleString('es-CR');
-    }
 
     function render() {
       var filtersEl = document.getElementById('filters');
@@ -593,18 +392,6 @@
         section.appendChild(grid);
         catalogEl.appendChild(section);
       });
-    }
-
-    function buildWhatsAppLink(items) {
-      var msg = 'Hola! Me gustaría preordenar:\n\n';
-      var total = 0;
-      items.forEach(function(item) {
-        var qty = item.qty || 1;
-        msg += '• ' + item.name + ' — ' + formatPrice(item.price) + (qty > 1 ? ' (×' + qty + ')' : '') + '\n';
-        total += item.price * qty;
-      });
-      msg += '\nTotal: ' + formatPrice(total);
-      return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
     }
 
     function getCart() {

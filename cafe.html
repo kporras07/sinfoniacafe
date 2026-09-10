@@ -49,6 +49,77 @@
       letter-spacing: 0.05em;
     }
 
+    .hamburger {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: #f0e6cf;
+      font-size: 1.6rem;
+      cursor: pointer;
+      padding: 0.25rem;
+      line-height: 1;
+    }
+
+    .nav-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: #4a5a25;
+      padding: 0.5rem 2rem 1rem;
+      flex-direction: column;
+    }
+
+    .nav-menu.open {
+      display: flex;
+    }
+
+    .nav-menu a {
+      color: #f0e6cf;
+      text-decoration: none;
+      padding: 0.6rem 0;
+      font-size: 1rem;
+      border-bottom: 1px solid rgba(240, 230, 207, 0.15);
+    }
+
+    .nav-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .nav-menu a:hover {
+      opacity: 0.8;
+    }
+
+    @media (min-width: 768px) {
+      .hamburger {
+        display: none;
+      }
+
+      .nav-menu {
+        display: flex;
+        position: static;
+        flex-direction: row;
+        gap: 2rem;
+        background: none;
+        padding: 0;
+        margin-left: auto;
+        align-items: center;
+      }
+
+      .nav-menu a {
+        padding: 0.4rem 0;
+        font-size: 1.05rem;
+        border-bottom: 2px solid transparent;
+        letter-spacing: 0.03em;
+      }
+
+      .nav-menu a:hover {
+        border-bottom-color: #f0e6cf;
+        opacity: 1;
+      }
+    }
+
     main {
       max-width: 900px;
       margin: 0 auto;
@@ -178,6 +249,13 @@
       <img src="images/logo.jpg" alt="Sinfonía Café">
     </a>
     <a href="/" class="site-title">Sinfonía Café</a>
+    <nav class="nav-menu" id="nav">
+      <a href="/">Inicio</a>
+      <a href="cafe">Nuestros Cafés</a>
+      <a href="preordenar">Preordenar</a>
+      <a href="https://instagram.com/sinfonia_cafe_cr" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+    <button class="hamburger" onclick="document.getElementById('nav').classList.toggle('open')" aria-label="Menú">&#9776;</button>
   </header>
 
   <main>

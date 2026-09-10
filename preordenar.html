@@ -49,28 +49,104 @@
       letter-spacing: 0.05em;
     }
 
-    .cart-btn {
+    .hamburger {
       margin-left: auto;
       background: none;
-      border: 2px solid #f0e6cf;
+      border: none;
       color: #f0e6cf;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      font-family: inherit;
-      font-size: 0.95rem;
+      font-size: 1.6rem;
       cursor: pointer;
-      position: relative;
-      transition: background-color 0.2s;
+      padding: 0.25rem;
+      line-height: 1;
+    }
+
+    .nav-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: #4a5a25;
+      padding: 0.5rem 2rem 1rem;
+      flex-direction: column;
+    }
+
+    .nav-menu.open {
+      display: flex;
+    }
+
+    .nav-menu a {
+      color: #f0e6cf;
+      text-decoration: none;
+      padding: 0.6rem 0;
+      font-size: 1rem;
+      border-bottom: 1px solid rgba(240, 230, 207, 0.15);
+    }
+
+    .nav-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .nav-menu a:hover {
+      opacity: 0.8;
+    }
+
+    @media (min-width: 768px) {
+      .hamburger {
+        display: none;
+      }
+
+      .nav-menu {
+        display: flex;
+        position: static;
+        flex-direction: row;
+        gap: 2rem;
+        background: none;
+        padding: 0;
+        margin-left: auto;
+        align-items: center;
+      }
+
+      .nav-menu a {
+        padding: 0.4rem 0;
+        font-size: 1.05rem;
+        border-bottom: 2px solid transparent;
+        letter-spacing: 0.03em;
+      }
+
+      .nav-menu a:hover {
+        border-bottom-color: #f0e6cf;
+        opacity: 1;
+      }
+
+    }
+
+    .cart-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 50;
+      background-color: #f0e6cf;
+      color: #637732;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 50px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s;
     }
 
     .cart-btn:hover {
-      background-color: rgba(240, 230, 207, 0.12);
+      transform: scale(1.05);
     }
 
     .cart-count {
       display: inline-block;
-      background-color: #f0e6cf;
-      color: #637732;
+      background-color: #637732;
+      color: #f0e6cf;
       border-radius: 50%;
       width: 22px;
       height: 22px;
@@ -344,10 +420,18 @@
       <img src="images/logo.jpg" alt="Sinfonía Café">
     </a>
     <a href="/" class="site-title">Sinfonía Café</a>
-    <button class="cart-btn" onclick="toggleCart()">
-      Carrito<span class="cart-count hidden" id="cart-count">0</span>
-    </button>
+    <nav class="nav-menu" id="nav">
+      <a href="/">Inicio</a>
+      <a href="cafe">Nuestros Cafés</a>
+      <a href="preordenar">Preordenar</a>
+      <a href="https://instagram.com/sinfonia_cafe_cr" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+    <button class="hamburger" onclick="document.getElementById('nav').classList.toggle('open')" aria-label="Menú">&#9776;</button>
   </header>
+
+  <button class="cart-btn" onclick="toggleCart()">
+    Carrito<span class="cart-count hidden" id="cart-count">0</span>
+  </button>
 
   <main>
     <h1>Preordenar</h1>

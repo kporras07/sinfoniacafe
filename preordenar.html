@@ -24,6 +24,10 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+      position: sticky;
+      top: 0;
+      background-color: #637732;
+      z-index: 10;
     }
 
     header img {
@@ -39,10 +43,46 @@
       font-size: 1.25rem;
     }
 
+    .cart-btn {
+      margin-left: auto;
+      background: none;
+      border: 2px solid #f0e6cf;
+      color: #f0e6cf;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      cursor: pointer;
+      position: relative;
+      transition: background-color 0.2s;
+    }
+
+    .cart-btn:hover {
+      background-color: rgba(240, 230, 207, 0.12);
+    }
+
+    .cart-count {
+      display: inline-block;
+      background-color: #f0e6cf;
+      color: #637732;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      font-size: 0.8rem;
+      line-height: 22px;
+      text-align: center;
+      margin-left: 0.4rem;
+      font-weight: bold;
+    }
+
+    .cart-count.hidden {
+      display: none;
+    }
+
     main {
-      max-width: 720px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 2rem;
+      padding: 1rem 2rem 4rem;
     }
 
     h1 {
@@ -53,12 +93,52 @@
     .subtitle {
       opacity: 0.75;
       font-style: italic;
+      margin-bottom: 2rem;
+    }
+
+    .category-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid rgba(240, 230, 207, 0.4);
+      color: #f0e6cf;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: #f0e6cf;
+    }
+
+    .filter-btn.active {
+      background-color: #f0e6cf;
+      color: #637732;
+      border-color: #f0e6cf;
+    }
+
+    .category-section {
       margin-bottom: 2.5rem;
+    }
+
+    .category-title {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(240, 230, 207, 0.3);
     }
 
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 1.5rem;
     }
 
@@ -66,35 +146,189 @@
       background-color: rgba(240, 230, 207, 0.1);
       border: 1px solid rgba(240, 230, 207, 0.25);
       border-radius: 8px;
-      padding: 1.5rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
-    .product-card h2 {
-      font-size: 1.2rem;
+    .product-card img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      background-color: rgba(240, 230, 207, 0.05);
+    }
+
+    .product-info {
+      padding: 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-info h3 {
+      font-size: 1rem;
       margin-bottom: 0.5rem;
+      line-height: 1.4;
     }
 
-    .product-card .price {
+    .product-info .price {
       font-size: 1.1rem;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
       opacity: 0.85;
     }
 
-    .product-card p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      opacity: 0.75;
+    .product-actions {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
     }
 
-    .empty-state {
+    .btn {
+      display: block;
       text-align: center;
-      padding: 4rem 1rem;
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover {
+      opacity: 0.85;
+    }
+
+    .btn-primary {
+      background-color: #f0e6cf;
+      color: #637732;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #f0e6cf;
+      border: 1px solid rgba(240, 230, 207, 0.5);
+    }
+
+    .cart-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 100;
+    }
+
+    .cart-overlay.open {
+      display: block;
+    }
+
+    .cart-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(420px, 100vw);
+      height: 100vh;
+      background-color: #556b2a;
+      z-index: 101;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .cart-panel.open {
+      transform: translateX(0);
+    }
+
+    .cart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(240, 230, 207, 0.2);
+    }
+
+    .cart-header h2 {
+      font-size: 1.3rem;
+    }
+
+    .cart-close {
+      background: none;
+      border: none;
+      color: #f0e6cf;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 1.5rem;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(240, 230, 207, 0.1);
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .cart-item-price {
+      font-size: 0.85rem;
       opacity: 0.7;
     }
 
-    .empty-state p {
-      font-size: 1.1rem;
+    .cart-item-remove {
+      background: none;
+      border: none;
+      color: #f0e6cf;
+      opacity: 0.6;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0.25rem 0.5rem;
+    }
+
+    .cart-item-remove:hover {
+      opacity: 1;
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      opacity: 0.6;
       font-style: italic;
+    }
+
+    .cart-footer {
+      padding: 1.5rem;
+      border-top: 1px solid rgba(240, 230, 207, 0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .cart-footer .btn {
+      width: 100%;
     }
   </style>
 </head>
@@ -104,27 +338,305 @@
       <img src="images/logo.jpg" alt="Sinfonía Café">
     </a>
     <a href="index.html">Sinfonía Café</a>
+    <button class="cart-btn" onclick="toggleCart()">
+      Carrito<span class="cart-count hidden" id="cart-count">0</span>
+    </button>
   </header>
 
   <main>
     <h1>Preordenar</h1>
     <p class="subtitle">Productos disponibles para preorden</p>
-
-    <div class="empty-state">
-      <p>Muy pronto agregaremos productos aquí. Seguinos en
-        <a href="https://instagram.com/sinfonia_cafe_cr" target="_blank" rel="noopener" style="color: #f0e6cf;">Instagram</a>
-        para enterarte primero.</p>
-    </div>
-
-    <!-- Ejemplo de producto (descomentá y duplicá para agregar productos):
-    <div class="products">
-      <div class="product-card">
-        <h2>Café Sinfonía — Tueste Medio</h2>
-        <div class="price">₡5,000</div>
-        <p>Bolsa de 340g. Notas de chocolate, cítricos y caramelo.</p>
-      </div>
-    </div>
-    -->
+    <div class="category-filters" id="filters"></div>
+    <div id="catalog"></div>
   </main>
+
+  <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+  <div class="cart-panel" id="cart-panel">
+    <div class="cart-header">
+      <h2>Carrito</h2>
+      <button class="cart-close" onclick="toggleCart()">&times;</button>
+    </div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-footer" id="cart-footer">
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cart-total">₡0</span>
+      </div>
+      <a id="cart-wa-link" class="btn btn-primary" target="_blank" rel="noopener">Preordenar por WhatsApp</a>
+      <button class="btn btn-outline" onclick="clearCart()">Vaciar carrito</button>
+    </div>
+  </div>
+
+  <script>
+    var WA_NUMBER = '50688888888';
+    var PLACEHOLDER_IMG = 'data:image/svg+xml,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">' +
+      '<rect fill="%23556b2a" width="400" height="400"/>' +
+      '<text x="200" y="210" text-anchor="middle" fill="%23f0e6cf" font-family="Georgia,serif" font-size="18" opacity="0.5">Imagen próximamente</text>' +
+      '</svg>'
+    );
+
+    var products = [
+      { category: 'Libros', name: 'The Physics of Espresso — Jonathan Gagné', price: 25000, image: 'images/physics-of-espresso.jpg' },
+      { category: 'Libros', name: 'The Physics of Filter Coffee — Jonathan Gagné', price: 25000, image: 'images/physics-of-filter-coffee.jpg' },
+      { category: 'Libros', name: 'Dear Coffee Buyer — Ryan Brown', price: 21500, image: 'images/dear-coffee-buyer.jpg' },
+      { category: 'Libros', name: 'Terroir — Barista Hustle', price: 18000, image: 'images/terroir-bh.jpg' },
+      { category: 'Libros', name: 'The Business of Specialty Coffee — Maxwell', price: 27000, image: 'images/the-business-of-specialty-coffee.jpg' },
+      { category: 'Libros', name: 'The Professional Barista\'s Handbook', price: 25000, image: 'images/tpbh.jpg' },
+      { category: 'Libros', name: 'The Coffee Roaster\'s Companion — Scott Rao', price: 25000, image: 'images/coffee-roaster-companion.jpg' },
+      { category: 'Libros', name: 'Coffee Roasting: Best Practices — Scott Rao', price: 25000, image: 'images/crbp.jpg' },
+      { category: 'Libros', name: 'Everything But Espresso — Scott Rao', price: 18000, image: 'images/ebe.jpg' },
+      { category: 'Libros', name: 'Water for Coffee 2nd Ed. — Dashwood & Hendon', price: 27000, image: 'images/wfc.jpg' },
+      { category: 'Libros', name: 'What I Know about Growing a Coffee Business', price: 27000, image: 'images/wikagacb.jpg' },
+      { category: 'Accesorios de filtrado', name: 'Subliminal Subscale', price: 25000, image: 'images/subscale.png' },
+      { category: 'Accesorios de filtrado', name: 'NextLevel Pulsar (Negro o Blanco)', price: 30500, image: 'images/pulsar.jpg' },
+      { category: 'Accesorios de filtrado', name: 'NextLevel Pulsar Mini (Negro, Azul, Blanco)', price: 27000, image: 'images/pulsar-mini.jpg' },
+      { category: 'Accesorios de filtrado', name: 'Filtros Pulsar (100/paquete)', price: 6000, image: 'images/pulsar-filters.jpg' },
+      { category: 'Accesorios de filtrado', name: 'Ceado Hoop', price: 18000, image: 'images/ceado-hoop.jpg' },
+      { category: 'Accesorios de filtrado', name: 'Filtros Hoop 62mm (100/paquete)', price: 6000, image: 'images/hoop-filters.jpg' },
+      { category: 'Accesorios de filtrado', name: 'Filtros 58mm para Pulsar Mini y Filter 3 (100)', price: 6000, image: 'images/58mm-filters.jpeg' },
+      { category: 'Airflow', name: 'Airflow Scale (Blanco/Verde/Negro)', price: 20500, image: 'images/airflow-scale.jpg' },
+      { category: 'Airflow', name: 'Airflow Tamper (Verde/Negro)', price: 16000, image: 'images/airflow-tamper.png' },
+      { category: 'Airflow', name: 'Airflow Dosing Ring', price: 13500, image: 'images/airflow-dosing-ring.png' },
+      { category: 'Barista Hustle', name: 'Cupping Bowls 24× Blanco', price: 36000, image: 'images/bh-cupping-white.webp' },
+      { category: 'Barista Hustle', name: 'Cupping Bowls 12× Negro', price: 25000, image: 'images/bh-cupping-black.webp' },
+      { category: 'Minerales para agua', name: 'Lotus Water', price: 29500, image: 'images/lotus-water.png' },
+      { category: 'Minerales para agua', name: 'Apax Konflux 20ml', price: 20500, image: 'images/apax-konflux.jpg' },
+    ];
+
+    var categories = [];
+    products.forEach(function(p) {
+      if (categories.indexOf(p.category) === -1) categories.push(p.category);
+    });
+
+    var activeFilter = null;
+
+    function formatPrice(n) {
+      return '₡' + n.toLocaleString('es-CR');
+    }
+
+    function render() {
+      var filtersEl = document.getElementById('filters');
+      filtersEl.innerHTML = '';
+      var allBtn = document.createElement('button');
+      allBtn.className = 'filter-btn' + (activeFilter === null ? ' active' : '');
+      allBtn.textContent = 'Todos';
+      allBtn.onclick = function() { activeFilter = null; render(); };
+      filtersEl.appendChild(allBtn);
+
+      categories.forEach(function(cat) {
+        var btn = document.createElement('button');
+        btn.className = 'filter-btn' + (activeFilter === cat ? ' active' : '');
+        btn.textContent = cat;
+        btn.onclick = function() { activeFilter = cat; render(); };
+        filtersEl.appendChild(btn);
+      });
+
+      var catalogEl = document.getElementById('catalog');
+      catalogEl.innerHTML = '';
+
+      var catsToShow = activeFilter ? [activeFilter] : categories;
+      catsToShow.forEach(function(cat) {
+        var catProducts = products.filter(function(p) { return p.category === cat; });
+        if (catProducts.length === 0) return;
+
+        var section = document.createElement('div');
+        section.className = 'category-section';
+        var title = document.createElement('h2');
+        title.className = 'category-title';
+        title.textContent = cat;
+        section.appendChild(title);
+
+        var grid = document.createElement('div');
+        grid.className = 'products';
+
+        catProducts.forEach(function(p, i) {
+          var card = document.createElement('div');
+          card.className = 'product-card';
+
+          var img = document.createElement('img');
+          img.src = p.image || PLACEHOLDER_IMG;
+          img.alt = p.name;
+          card.appendChild(img);
+
+          var info = document.createElement('div');
+          info.className = 'product-info';
+
+          var h3 = document.createElement('h3');
+          h3.textContent = p.name;
+          info.appendChild(h3);
+
+          var price = document.createElement('div');
+          price.className = 'price';
+          price.textContent = formatPrice(p.price);
+          info.appendChild(price);
+
+          var actions = document.createElement('div');
+          actions.className = 'product-actions';
+
+          var waLink = document.createElement('a');
+          waLink.className = 'btn btn-primary';
+          waLink.href = buildWhatsAppLink([p]);
+          waLink.target = '_blank';
+          waLink.rel = 'noopener';
+          waLink.textContent = 'Preordenar';
+          actions.appendChild(waLink);
+
+          var cartBtnEl = document.createElement('button');
+          cartBtnEl.className = 'btn btn-outline';
+          cartBtnEl.textContent = 'Agregar al carrito';
+          cartBtnEl.onclick = (function(product) {
+            return function() {
+              addToCart(product);
+              this.textContent = 'Agregado ✓';
+              var self = this;
+              setTimeout(function() { self.textContent = 'Agregar al carrito'; }, 1200);
+            };
+          })(p);
+          actions.appendChild(cartBtnEl);
+
+          info.appendChild(actions);
+          card.appendChild(info);
+          grid.appendChild(card);
+        });
+
+        section.appendChild(grid);
+        catalogEl.appendChild(section);
+      });
+    }
+
+    function buildWhatsAppLink(items) {
+      var msg = 'Hola! Me gustaría preordenar:\n\n';
+      var total = 0;
+      items.forEach(function(item) {
+        var qty = item.qty || 1;
+        msg += '• ' + item.name + ' — ' + formatPrice(item.price) + (qty > 1 ? ' (×' + qty + ')' : '') + '\n';
+        total += item.price * qty;
+      });
+      msg += '\nTotal: ' + formatPrice(total);
+      return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
+    }
+
+    function getCart() {
+      try {
+        return JSON.parse(localStorage.getItem('sinfonia_cart')) || [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('sinfonia_cart', JSON.stringify(cart));
+      updateCartUI();
+    }
+
+    function addToCart(product) {
+      var cart = getCart();
+      var existing = null;
+      for (var i = 0; i < cart.length; i++) {
+        if (cart[i].name === product.name) { existing = cart[i]; break; }
+      }
+      if (existing) {
+        existing.qty = (existing.qty || 1) + 1;
+      } else {
+        cart.push({ name: product.name, price: product.price, qty: 1 });
+      }
+      saveCart(cart);
+    }
+
+    function removeFromCart(index) {
+      var cart = getCart();
+      cart.splice(index, 1);
+      saveCart(cart);
+      renderCart();
+    }
+
+    function clearCart() {
+      saveCart([]);
+      renderCart();
+    }
+
+    function updateCartUI() {
+      var cart = getCart();
+      var total = 0;
+      cart.forEach(function(item) { total += item.qty || 1; });
+      var countEl = document.getElementById('cart-count');
+      if (total > 0) {
+        countEl.textContent = total;
+        countEl.classList.remove('hidden');
+      } else {
+        countEl.classList.add('hidden');
+      }
+    }
+
+    function renderCart() {
+      var cart = getCart();
+      var itemsEl = document.getElementById('cart-items');
+      var footerEl = document.getElementById('cart-footer');
+
+      if (cart.length === 0) {
+        itemsEl.innerHTML = '<div class="cart-empty">El carrito está vacío</div>';
+        footerEl.style.display = 'none';
+        return;
+      }
+
+      footerEl.style.display = '';
+      itemsEl.innerHTML = '';
+      var total = 0;
+
+      cart.forEach(function(item, i) {
+        var qty = item.qty || 1;
+        total += item.price * qty;
+
+        var div = document.createElement('div');
+        div.className = 'cart-item';
+
+        var info = document.createElement('div');
+        info.className = 'cart-item-info';
+
+        var name = document.createElement('div');
+        name.className = 'cart-item-name';
+        name.textContent = (qty > 1 ? qty + '× ' : '') + item.name;
+        info.appendChild(name);
+
+        var price = document.createElement('div');
+        price.className = 'cart-item-price';
+        price.textContent = formatPrice(item.price * qty);
+        info.appendChild(price);
+
+        div.appendChild(info);
+
+        var removeBtn = document.createElement('button');
+        removeBtn.className = 'cart-item-remove';
+        removeBtn.innerHTML = '&times;';
+        removeBtn.onclick = (function(idx) {
+          return function() { removeFromCart(idx); };
+        })(i);
+        div.appendChild(removeBtn);
+
+        itemsEl.appendChild(div);
+      });
+
+      document.getElementById('cart-total').textContent = formatPrice(total);
+      document.getElementById('cart-wa-link').href = buildWhatsAppLink(cart);
+    }
+
+    function toggleCart() {
+      var overlay = document.getElementById('cart-overlay');
+      var panel = document.getElementById('cart-panel');
+      var isOpen = panel.classList.contains('open');
+      if (isOpen) {
+        panel.classList.remove('open');
+        overlay.classList.remove('open');
+      } else {
+        renderCart();
+        panel.classList.add('open');
+        overlay.classList.add('open');
+      }
+    }
+
+    render();
+    updateCartUI();
+  </script>
 </body>
 </html>
